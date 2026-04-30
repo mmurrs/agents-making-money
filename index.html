@@ -10,345 +10,152 @@
   <link rel="stylesheet" href="./colors_and_type.css" />
   <style>
     html { scroll-behavior: smooth; }
+    body { background: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
 
-    body {
-      background: var(--color-background);
-      color: var(--color-foreground);
-      font-family: var(--font-sans);
-    }
-
-    section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 6rem 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2.5rem; position: relative; overflow: hidden; }
     .wrap { max-width: 1120px; margin: 0 auto; width: 100%; }
 
-    /* Geometric grid motif */
     .grid-bg::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      content: ""; position: absolute; inset: 0;
       background-image:
         linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
+      background-size: 48px 48px; pointer-events: none; z-index: 0;
     }
     .grid-bg > .wrap { position: relative; z-index: 1; }
 
-    .drift {
-      position: absolute;
-      width: 12px; height: 12px;
-      background: var(--indigo-600);
-      opacity: 0.15;
-      pointer-events: none;
-      animation: drift 22s linear infinite;
-    }
+    .drift { position: absolute; width: 12px; height: 12px; background: var(--indigo-600); opacity: 0.15; pointer-events: none; animation: drift 22s linear infinite; }
     @keyframes drift {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
-      10%  { opacity: 0.22; }
-      90%  { opacity: 0.22; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.22; }
+      90% { opacity: 0.22; }
       100% { transform: translateY(-120vh) rotate(90deg); opacity: 0; }
     }
 
-    .eyebrow-indigo {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--indigo-300);
-      font-weight: 500;
-    }
+    .eyebrow-indigo { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--indigo-300); font-weight: 500; }
+    .accent-bar { width: 2.5rem; height: 3px; background: var(--indigo-400); border-radius: 2px; margin-bottom: 1.25rem; }
 
-    .accent-bar {
-      width: 2.5rem; height: 3px;
-      background: var(--indigo-400);
-      border-radius: 2px;
-      margin-bottom: 1.25rem;
-    }
+    .display-hero { font-family: var(--font-heading); font-size: clamp(3rem, 9vw, 7.5rem); line-height: 0.95; letter-spacing: -0.03em; font-weight: 700; }
+    .display-xl { font-family: var(--font-heading); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -0.025em; font-weight: 700; }
+    .display-lg { font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 600; }
+    .display-md { font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.01em; font-weight: 600; }
+    .serif-accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--indigo-300); }
 
-    .display-hero {
-      font-family: var(--font-heading);
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      font-weight: 700;
-    }
-    .display-xl {
-      font-family: var(--font-heading);
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      line-height: 1;
-      letter-spacing: -0.025em;
-      font-weight: 700;
-    }
-    .display-lg {
-      font-family: var(--font-heading);
-      font-size: clamp(1.5rem, 3vw, 2.25rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      font-weight: 600;
-    }
-    .display-md {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      font-weight: 600;
-    }
-    .serif-accent {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-weight: 400;
-      color: var(--indigo-300);
-    }
-
-    .card {
-      background: var(--color-card);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      padding: 1.5rem;
-      transition: border-color 150ms ease;
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
+    .card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.5rem; transition: border-color 150ms ease; display: block; text-decoration: none; color: inherit; }
     a.card:hover { border-color: var(--indigo-400); }
 
-    .card-indigo {
-      background: linear-gradient(180deg, var(--indigo-800) 0%, var(--indigo-900) 100%);
-      border: 1px solid var(--indigo-600);
-    }
+    .card-indigo { background: linear-gradient(180deg, var(--indigo-800) 0%, var(--indigo-900) 100%); border: 1px solid var(--indigo-600); }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.625rem;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-full);
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--color-muted-foreground);
-      background: var(--color-card);
-    }
-    .pill .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--indigo-400);
-      box-shadow: 0 0 8px var(--indigo-400);
-    }
+    .pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.625rem; border: 1px solid var(--color-border); border-radius: var(--radius-full); font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-muted-foreground); background: var(--color-card); }
+    .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--indigo-400); box-shadow: 0 0 8px var(--indigo-400); }
 
     pre, code { font-family: var(--font-mono); }
-    .codeblock {
-      background: var(--neutral-900);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      padding: 1.25rem 1.5rem;
-      font-size: 0.8125rem;
-      line-height: 1.6;
-      color: var(--neutral-100);
-      overflow-x: auto;
-    }
+    .codeblock { background: var(--neutral-900); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.25rem 1.5rem; font-size: 0.8125rem; line-height: 1.6; color: var(--neutral-100); overflow-x: auto; }
     .codeblock .c { color: var(--neutral-500); }
 
     .text-muted { color: var(--color-muted-foreground); }
+    .divider { height: 1px; background: var(--color-border); margin: 2.5rem 0; }
 
-    .divider {
-      height: 1px;
-      background: var(--color-border);
-      margin: 2.5rem 0;
-    }
+    /* Read → Write → Own flow */
+    .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 1rem; align-items: stretch; margin-top: 2.5rem; }
+    @media (max-width: 820px) { .flow { grid-template-columns: 1fr; } .flow .arrow { display: none; } }
+    .flow-node { background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.5rem; display: flex; flex-direction: column; min-height: 190px; }
+    .flow-node.active { border-color: var(--indigo-500); background: linear-gradient(180deg, rgba(26,12,109,0.35), rgba(26,12,109,0.1)); }
+    .flow-node.ghost { border-style: dashed; opacity: 0.75; }
+    .arrow { display: flex; align-items: center; justify-content: center; color: var(--indigo-400); font-family: var(--font-mono); font-size: 1.5rem; font-weight: 300; padding: 0 0.25rem; }
 
-    /* Read→Write→Own flow diagram */
-    .flow {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      gap: 1rem;
-      align-items: stretch;
-      margin-top: 2.5rem;
-    }
-    @media (max-width: 820px) {
-      .flow { grid-template-columns: 1fr; }
-      .flow .arrow { display: none; }
-    }
-    .flow-node {
+    /* Two-column read/write */
+    .rw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
+    @media (max-width: 820px) { .rw-grid { grid-template-columns: 1fr; } }
+    .rw-col {
       background: var(--color-card);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-xl);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      min-height: 190px;
+      padding: 1.75rem;
     }
-    .flow-node.active {
-      border-color: var(--indigo-500);
-      background: linear-gradient(180deg, rgba(26,12,109,0.35), rgba(26,12,109,0.1));
-    }
-    .flow-node.ghost {
-      border-style: dashed;
-      opacity: 0.7;
-    }
-    .arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--indigo-400);
-      font-family: var(--font-mono);
-      font-size: 1.5rem;
-      font-weight: 300;
-      padding: 0 0.25rem;
-    }
+    .rw-col.read { border-left: 4px solid var(--indigo-400); }
+    .rw-col.write { border-left: 4px solid var(--indigo-600); }
+    .rw-col h3 { font-family: var(--font-heading); font-size: 2.25rem; letter-spacing: -0.02em; font-weight: 700; }
+    .rw-item { padding: 0.75rem 0; border-top: 1px solid var(--color-border); }
+    .rw-item:first-of-type { border-top: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+    .rw-item p.name { font-weight: 500; font-size: 1rem; }
+    .rw-item p.note { color: var(--color-muted-foreground); font-size: 0.875rem; margin-top: 0.25rem; font-family: var(--font-mono); }
+    .rw-sub { display: inline-block; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--indigo-300); margin-bottom: 0.25rem; }
 
-    /* Privacy / convenience slider visual */
-    .slider-box {
-      margin-top: 1.5rem;
-      padding: 1.5rem;
-      background: var(--color-card);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-    }
-    .slider-track {
-      position: relative;
-      height: 3px;
-      background: linear-gradient(to right, var(--indigo-600), var(--neutral-700));
-      border-radius: 2px;
-      margin: 2rem 0 0.75rem 0;
-    }
-    .slider-thumb {
-      position: absolute;
-      top: 50%;
-      left: 68%;
-      transform: translate(-50%, -50%);
-      width: 14px; height: 14px;
-      background: var(--indigo-300);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--indigo-400);
-    }
-    .slider-labels {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-muted-foreground);
-    }
+    /* Privacy slider */
+    .slider-box { margin-top: 1rem; padding: 1rem; }
+    .slider-track { position: relative; height: 3px; background: linear-gradient(to right, var(--indigo-600), var(--neutral-700)); border-radius: 2px; margin: 2rem 0 0.75rem 0; }
+    .slider-thumb { position: absolute; top: 50%; left: 68%; transform: translate(-50%, -50%); width: 14px; height: 14px; background: var(--indigo-300); border-radius: 50%; box-shadow: 0 0 12px var(--indigo-400); }
+    .slider-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-muted-foreground); }
 
-    .nav-dots {
-      position: fixed;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      z-index: 10;
-    }
-    .nav-dots a {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--neutral-700);
-      transition: background 150ms, transform 150ms;
-    }
+    .nav-dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 0.75rem; z-index: 10; }
+    .nav-dots a { width: 8px; height: 8px; border-radius: 50%; background: var(--neutral-700); transition: background 150ms, transform 150ms; }
     .nav-dots a:hover { background: var(--indigo-400); transform: scale(1.2); }
 
-    .avatar {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      object-fit: cover;
-      background: var(--neutral-800);
-      border: 1px solid var(--color-border);
-    }
+    .avatar { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: var(--neutral-800); border: 1px solid var(--color-border); }
 
-    .tag {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      color: var(--indigo-300);
-      border: 1px solid var(--indigo-600);
-      border-radius: var(--radius-full);
-      padding: 0.125rem 0.625rem;
-      background: rgba(26, 12, 109, 0.2);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+    .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--indigo-300); border: 1px solid var(--indigo-600); border-radius: var(--radius-full); padding: 0.125rem 0.625rem; background: rgba(26, 12, 109, 0.2); text-transform: uppercase; letter-spacing: 0.06em; }
 
-    .qr-placeholder {
-      width: 200px;
-      height: 200px;
-      background: #fff;
-      border-radius: var(--radius-xl);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--neutral-900);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-align: center;
-      padding: 1rem;
-    }
+    .qr-placeholder { width: 200px; height: 200px; background: #fff; border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; color: var(--neutral-900); font-family: var(--font-mono); font-size: 0.75rem; text-align: center; padding: 1rem; }
 
-    .bullet {
-      display: flex;
-      gap: 0.75rem;
-      font-size: 1.125rem;
-      padding: 0.5rem 0;
-    }
-    .bullet .mark {
-      color: var(--indigo-400);
-      font-family: var(--font-mono);
-    }
-
-    .experiment-grid {
+    /* Experiment gallery */
+    .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1rem;
       margin-top: 2rem;
     }
-
-    .tweet-placeholder {
+    .gallery .card { padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .gallery .shot {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
       background: var(--neutral-900);
-      border: 1px dashed var(--neutral-700);
-      border-radius: var(--radius-xl);
-      padding: 1rem;
-      margin-top: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--neutral-500);
-      text-align: center;
+      aspect-ratio: 16/10;
+      display: block;
     }
+    .gallery .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery .caption { display: flex; flex-direction: column; gap: 0.25rem; padding: 0 0.25rem; }
+    .gallery .caption .ey { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--indigo-300); }
+    .gallery .caption .ttl { font-family: var(--font-heading); font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
+    .gallery .caption .note { color: var(--color-muted-foreground); font-size: 0.875rem; }
 
-    .footer-bar {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
+    .common-thread {
+      margin-top: 2.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--color-card);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-xl);
-      background: var(--color-card);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      text-align: center;
     }
+    .common-thread span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--indigo-300);
+    }
+    .common-thread .sep { color: var(--neutral-700); }
 
+    .footer-bar { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-card); }
     .logo-wordmark { height: 16px; opacity: 0.8; }
   </style>
 </head>
 <body>
 
   <nav class="nav-dots" aria-label="sections">
-    <a href="#title" title="title"></a>
-    <a href="#premise" title="premise"></a>
-    <a href="#state" title="state"></a>
-    <a href="#tour" title="tour"></a>
-    <a href="#edges" title="edges"></a>
-    <a href="#experiments" title="experiments"></a>
-    <a href="#discuss" title="discuss"></a>
+    <a href="#title"></a>
+    <a href="#premise"></a>
+    <a href="#state"></a>
+    <a href="#tour"></a>
+    <a href="#edges"></a>
+    <a href="#experiments"></a>
+    <a href="#discuss"></a>
   </nav>
 
   <!-- 0. TITLE -->
@@ -356,10 +163,10 @@
     <span class="drift" style="left: 12%; animation-delay: -2s;"></span>
     <span class="drift" style="left: 78%; animation-delay: -8s;"></span>
     <div class="wrap">
-      <p class="eyebrow-indigo" style="margin-bottom: 1.25rem;">a talk</p>
+      <p class="eyebrow-indigo" style="margin-bottom: 1.25rem;">a talk · open questions for discussion</p>
       <h1 class="display-hero">
         Agents Making Money<br/>
-        <span class="serif-accent" style="font-size: 0.5em;">and what they're buying.</span>
+        <span class="serif-accent" style="font-size: 0.42em;">where we are, where I think it's going, and what's still open.</span>
       </h1>
 
       <div style="display: flex; align-items: center; gap: 1rem; margin-top: 4rem;">
@@ -381,7 +188,7 @@
 
       <p style="margin-top: 2rem; font-size: 1.25rem; color: var(--color-muted-foreground); max-width: 720px;">
         Algorithms have always shaped the internet — static ads, programmatic ads, hedge-fund trading.
-        Code has moved money for a while. <span style="color: var(--indigo-300); font-family: var(--font-serif); font-style: italic;">Agents are the next beat.</span>
+        Code has moved money for a while. <span class="serif-accent">Agents are the next beat.</span>
       </p>
 
       <div class="divider"></div>
@@ -404,7 +211,7 @@
     </div>
   </section>
 
-  <!-- 2. STATE OF THINGS: Read → Write → Own? -->
+  <!-- 2. STATE -->
   <section id="state" class="grid-bg">
     <div class="wrap">
       <p class="eyebrow-indigo">02 — where we are</p>
@@ -412,7 +219,7 @@
       <h2 class="display-xl">Capabilities are winning.</h2>
       <p style="margin-top: 1.5rem; font-size: 1.25rem; color: var(--color-muted-foreground); max-width: 720px;">
         Every week brings more services an agent can use. People are posting screenshots —
-        "you can now get 55 services." Payments are bridging read to write.
+        "you can now get 55 services." Payments bridge read to write.
       </p>
 
       <div class="flow">
@@ -420,7 +227,7 @@
           <p class="eyebrow-indigo">read</p>
           <p class="display-lg" style="margin-top: 0.5rem;">Agent consumes</p>
           <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.9375rem;">
-            x402 endpoints, MCPs, APIs. Search, research, scrape. Exa, Parallel, Firecrawl, and hundreds more.
+            Search, research, scrape, data. Exa, Parallel, Firecrawl, and hundreds more.
           </p>
         </div>
 
@@ -430,8 +237,7 @@
           <p class="eyebrow-indigo">write</p>
           <p class="display-lg" style="margin-top: 0.5rem;">Agent transacts</p>
           <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.9375rem;">
-            Direct USDC transfers. DeFi calls. Stripe Projects buys domains and spins up infra.
-            OpenFront paying out to contributors.
+            Direct onchain calls, Polymarket, x402, Stripe, USDC transfers.
           </p>
         </div>
 
@@ -441,15 +247,10 @@
           <p class="eyebrow-indigo">own?</p>
           <p class="display-lg" style="margin-top: 0.5rem;">Agent accrues</p>
           <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.9375rem;">
-            Wallet, identity, reputation, balance sheet. Still open — partly because the others aren't yet.
+            Wallet, identity, reputation, balance sheet. Still open — partly because the others aren't settled.
           </p>
         </div>
       </div>
-
-      <p style="margin-top: 2.5rem; font-size: 1.125rem; color: var(--color-muted-foreground); max-width: 720px;">
-        Payment rails are the bridge — stablecoins, x402/MPP, Stripe, onchain.
-        Lots of people figuring that out. Not where the novelty is.
-      </p>
     </div>
   </section>
 
@@ -458,44 +259,69 @@
     <div class="wrap">
       <p class="eyebrow-indigo">03 — what agents are paying for</p>
       <div class="accent-bar"></div>
-      <h2 class="display-xl">Live today.</h2>
+      <h2 class="display-xl">Two buckets. Both live.</h2>
 
-      <div style="margin-top: 2rem;">
-        <a href="https://x402scan.com" target="_blank" class="card" style="padding: 1.75rem;">
-          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
-            <span class="tag">directory</span>
-            <p class="code text-muted">x402scan.com</p>
+      <div class="rw-grid">
+
+        <div class="rw-col read">
+          <span class="rw-sub">bucket 01</span>
+          <h3>Read</h3>
+          <p class="text-muted" style="font-size: 0.9375rem; margin-top: 0.5rem;">
+            Agent consumes information via 402 endpoints.
+          </p>
+
+          <div class="rw-item">
+            <p class="name">Exa</p>
+            <p class="note">neural search · $0.01 / call</p>
           </div>
-          <p class="display-lg">The map — every x402 service, live prices, real traffic.</p>
-        </a>
+          <div class="rw-item">
+            <p class="name">Parallel</p>
+            <p class="note">research tasks · agent → agent</p>
+          </div>
+          <div class="rw-item">
+            <p class="name">Firecrawl</p>
+            <p class="note">scrape as a service · JS-render</p>
+          </div>
+          <div class="rw-item">
+            <p class="name">AgentCash</p>
+            <p class="note">many APIs for one agent</p>
+          </div>
+        </div>
+
+        <div class="rw-col write">
+          <span class="rw-sub">bucket 02</span>
+          <h3>Write</h3>
+          <p class="text-muted" style="font-size: 0.9375rem; margin-top: 0.5rem;">
+            Agent sends money, executes transactions.
+          </p>
+
+          <div class="rw-item">
+            <p class="name">Directly onchain</p>
+            <p class="note">smart contract calls · Polymarket</p>
+          </div>
+          <div class="rw-item">
+            <p class="name">USDC / stablecoin transfers</p>
+            <p class="note">direct ERC-20 sends · any chain</p>
+          </div>
+          <div class="rw-item">
+            <p class="name">Stripe Projects</p>
+            <p class="note">buy domains, spin up infra</p>
+          </div>
+          <div class="rw-item">
+            <p class="name">x402 / MPP</p>
+            <p class="note">HTTP-native payment, any endpoint</p>
+          </div>
+        </div>
+
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
-        <a href="https://exa.ai" target="_blank" class="card">
-          <p class="eyebrow">Exa</p>
-          <p class="display-md" style="margin-top: 0.5rem;">Neural search</p>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">$0.01 / search</p>
-        </a>
-        <a href="https://parallel.ai" target="_blank" class="card">
-          <p class="eyebrow">Parallel</p>
-          <p class="display-md" style="margin-top: 0.5rem;">Research tasks</p>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">agent delegates to agent</p>
-        </a>
-        <a href="https://firecrawl.dev" target="_blank" class="card">
-          <p class="eyebrow">Firecrawl</p>
-          <p class="display-md" style="margin-top: 0.5rem;">Scrape-as-a-service</p>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">pay per page, JS rendering</p>
-        </a>
-        <a href="#" target="_blank" class="card">
-          <p class="eyebrow">the weird ones</p>
-          <p class="display-md" style="margin-top: 0.5rem;">Wine bots, booking, payouts</p>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">physical-world consequences</p>
-        </a>
-      </div>
+      <p style="margin-top: 2rem; font-size: 1rem; color: var(--color-muted-foreground); max-width: 720px;">
+        <span class="serif-accent">An agent can pay for any service with a 402 endpoint.</span> Question: <em>what services are there?</em>
+      </p>
     </div>
   </section>
 
-  <!-- 4. EDGES (open questions, privacy slider inline) -->
+  <!-- 4. EDGES -->
   <section id="edges" class="grid-bg">
     <span class="drift" style="left: 22%; animation-delay: -5s;"></span>
     <span class="drift" style="left: 76%; animation-delay: -12s;"></span>
@@ -508,16 +334,16 @@
       </h2>
 
       <p style="margin-top: 2rem; font-size: 1.125rem; color: var(--color-muted-foreground); max-width: 720px;">
-        I don't have answers here. A few of the threads I keep pulling on:
+        I don't have answers here. A few threads I keep pulling on:
       </p>
 
       <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+
         <div class="card">
           <p class="eyebrow-indigo">discovery</p>
           <p class="display-md" style="margin-top: 0.5rem;">How do agents find each other?</p>
           <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
-            Persistent identity. Reputation that carries. Something durable an agent can point to.
-            Standards are emerging — nobody knows what sticks.
+            Persistent identity. Reputation that carries. Something durable. Standards are emerging — nobody knows what sticks.
           </p>
         </div>
 
@@ -530,59 +356,112 @@
         </div>
 
         <div class="card">
+          <p class="eyebrow-indigo">open source</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Where do small / OSS models fit?</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            Frontier inference is one option. What about local, distilled, or purpose-built models agents could own and run themselves?
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="eyebrow-indigo">capital</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Where does innovation get funded?</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            If agents can earn, can they raise? Who funds agent-native ideas — and how do you even evaluate them?
+          </p>
+        </div>
+
+        <div class="card">
           <p class="eyebrow-indigo">privacy · convenience</p>
           <p class="display-md" style="margin-top: 0.5rem;">The tension is real.</p>
           <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
-            Convenience pulls toward shared context. Privacy pulls the other way.
-            Where do you land?
+            Convenience pulls toward shared context. Privacy pulls back. Where do you land?
           </p>
-          <div class="slider-box" style="margin-top: 1rem; padding: 1rem;">
+          <div class="slider-box">
             <div class="slider-track"><div class="slider-thumb"></div></div>
             <div class="slider-labels"><span>privacy</span><span>convenience</span></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- 5. WHAT WE'RE TINKERING WITH -->
+  <!-- 5. EXPERIMENTS -->
   <section id="experiments">
     <div class="wrap">
       <p class="eyebrow-indigo">05 — what we're tinkering with</p>
       <div class="accent-bar"></div>
-      <h2 class="display-xl">A few things we're tinkering with.</h2>
+      <h2 class="display-xl">A few things.</h2>
       <p style="margin-top: 1.5rem; font-size: 1.125rem; color: var(--color-muted-foreground); max-width: 720px;">
         Verifiable compute, wallet-bound code, agent tooling — things we're assembling at Eigen,
         and what's come out of using them.
       </p>
 
-      <div class="experiment-grid">
-        <div class="card">
-          <p class="eyebrow-indigo">transit402</p>
-          <p class="display-md" style="margin-top: 0.5rem;">NYC transit, per-call</p>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
-            Subway, bus, Citi Bike for agents. $0.02 per check via x402 or MPP. Something I built to learn the rails.
-          </p>
-          <div class="tweet-placeholder">[ embed: transit402 tweet ]</div>
-        </div>
+      <div class="gallery">
+        <a href="https://transit402.dev" target="_blank" class="card">
+          <div class="shot"><img src="./assets/screenshots/transit402.png" alt="transit402 landing page" /></div>
+          <div class="caption">
+            <span class="ey">my thing</span>
+            <span class="ttl">transit402</span>
+            <span class="note">Real-time NYC transit. $0.02/check, x402 or MPP.</span>
+          </div>
+        </a>
 
-        <div class="card">
-          <p class="eyebrow-indigo">dark bloom</p>
-          <p class="display-md" style="margin-top: 0.5rem;">Agents running companies</p>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
-            Pure-software firms — code that owns capital, makes decisions, pays contributors. Early probe.
-          </p>
-          <div class="tweet-placeholder">[ embed: dark bloom tweet ]</div>
-        </div>
+        <a href="https://www.darkbloom.dev/#thesis" target="_blank" class="card">
+          <div class="shot"><img src="./assets/screenshots/darkbloom.png" alt="Dark Bloom agent with wallet transactions" /></div>
+          <div class="caption">
+            <span class="ey">probe</span>
+            <span class="ttl">Dark Bloom</span>
+            <span class="note">Agent with a wallet and a balance sheet.</span>
+          </div>
+        </a>
 
-        <div class="card">
-          <p class="eyebrow-indigo">agentkit</p>
-          <p class="display-md" style="margin-top: 0.5rem;">Agent accounts + tooling</p>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
-            Spin up a verifiable agent with its own wallet. Default path for "own."
-          </p>
-          <div class="tweet-placeholder">[ embed: agentkit example ]</div>
-        </div>
+        <a href="https://openfront.gg" target="_blank" class="card">
+          <div class="shot"><img src="./assets/screenshots/openfront-maus.png" alt="OpenFront 650k MAUs tweet" /></div>
+          <div class="caption">
+            <span class="ey">real users</span>
+            <span class="ttl">OpenFront</span>
+            <span class="note">650k MAU indie game running paid tournaments onchain.</span>
+          </div>
+        </a>
+
+        <a href="#" target="_blank" class="card">
+          <div class="shot"><img src="./assets/screenshots/openfront-tournament.png" alt="OpenFront tournament flow" /></div>
+          <div class="caption">
+            <span class="ey">how</span>
+            <span class="ttl">Tournament payouts</span>
+            <span class="note">Game runs on EigenCloud. Results verifiable. Winners paid onchain.</span>
+          </div>
+        </a>
+
+        <a href="https://docs.eigencloud.xyz/agentkit/get-started/agentkit-overview" target="_blank" class="card">
+          <div class="shot"><img src="./assets/screenshots/agentkit-docs.png" alt="AgentKit documentation" /></div>
+          <div class="caption">
+            <span class="ey">toolkit</span>
+            <span class="ttl">AgentKit</span>
+            <span class="note">Wallet · email · website · crypto identity · verifiable execution.</span>
+          </div>
+        </a>
+
+        <a href="#" target="_blank" class="card">
+          <div class="shot"><img src="./assets/screenshots/agent-wallet-transactions.png" alt="agent wallet and transactions" /></div>
+          <div class="caption">
+            <span class="ey">future bet</span>
+            <span class="ttl">Agent companies</span>
+            <span class="note">Where we think this heads — code that owns capital, earns, pays out.</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="common-thread">
+        <span>Source Code Verified</span>
+        <span class="sep">·</span>
+        <span>Service Integrity</span>
+        <span class="sep">·</span>
+        <span>Open Coordination</span>
+        <span class="sep">·</span>
+        <span>Open Innovation</span>
       </div>
     </div>
   </section>
@@ -612,7 +491,7 @@
 
           <div class="codeblock" style="margin-top: 1rem;">
 <span class="c"># get started</span>
-npm i @eigencloud/<span style="color: var(--indigo-300);">agentkit</span>
+npm i <span style="color: var(--indigo-300);">ecloud</span>
 <span class="c"># or browse:</span>
 <span class="c"># agentkit · agentcash · x402 · stripe</span>
           </div>
