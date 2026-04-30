@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agents Making Money — Matt Murray</title>
+  <title>Agents Making Money</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet" />
@@ -22,14 +22,14 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 6rem 2rem;
+      padding: 6rem 2.5rem;
       position: relative;
       overflow: hidden;
     }
 
     .wrap { max-width: 1120px; margin: 0 auto; width: 100%; }
 
-    /* Geometric square grid motif — the "modular, moving geometric (square)" brief */
+    /* Geometric grid motif */
     .grid-bg::before {
       content: "";
       position: absolute;
@@ -43,17 +43,16 @@
     }
     .grid-bg > .wrap { position: relative; z-index: 1; }
 
-    /* Drifting squares (silent, low-contrast) */
     .drift {
       position: absolute;
       width: 12px; height: 12px;
       background: var(--indigo-600);
       opacity: 0.15;
       pointer-events: none;
-      animation: drift 18s linear infinite;
+      animation: drift 22s linear infinite;
     }
     @keyframes drift {
-      0%   { transform: translateY(0)     rotate(0deg); opacity: 0; }
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
       10%  { opacity: 0.22; }
       90%  { opacity: 0.22; }
       100% { transform: translateY(-120vh) rotate(90deg); opacity: 0; }
@@ -62,10 +61,17 @@
     .eyebrow-indigo {
       font-family: var(--font-mono);
       font-size: 0.6875rem;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--indigo-300);
       font-weight: 500;
+    }
+
+    .accent-bar {
+      width: 2.5rem; height: 3px;
+      background: var(--indigo-400);
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
     }
 
     .display-hero {
@@ -75,23 +81,27 @@
       letter-spacing: -0.03em;
       font-weight: 700;
     }
-
     .display-xl {
       font-family: var(--font-heading);
-      font-size: clamp(2.5rem, 6.5vw, 5rem);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
       line-height: 1;
       letter-spacing: -0.025em;
       font-weight: 700;
     }
-
     .display-lg {
       font-family: var(--font-heading);
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.05;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      line-height: 1.1;
       letter-spacing: -0.02em;
       font-weight: 600;
     }
-
+    .display-md {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      font-weight: 600;
+    }
     .serif-accent {
       font-family: var(--font-serif);
       font-style: italic;
@@ -104,14 +114,12 @@
       border: 1px solid var(--color-border);
       border-radius: var(--radius-xl);
       padding: 1.5rem;
-      transition: border-color 150ms ease, transform 150ms ease;
+      transition: border-color 150ms ease;
       display: block;
       text-decoration: none;
       color: inherit;
     }
-    a.card:hover {
-      border-color: var(--indigo-400);
-    }
+    a.card:hover { border-color: var(--indigo-400); }
 
     .card-indigo {
       background: linear-gradient(180deg, var(--indigo-800) 0%, var(--indigo-900) 100%);
@@ -138,10 +146,7 @@
       box-shadow: 0 0 8px var(--indigo-400);
     }
 
-    pre, code {
-      font-family: var(--font-mono);
-    }
-
+    pre, code { font-family: var(--font-mono); }
     .codeblock {
       background: var(--neutral-900);
       border: 1px solid var(--color-border);
@@ -153,7 +158,8 @@
       overflow-x: auto;
     }
     .codeblock .c { color: var(--neutral-500); }
-    .codeblock .k { color: var(--indigo-300); }
+
+    .text-muted { color: var(--color-muted-foreground); }
 
     .divider {
       height: 1px;
@@ -161,22 +167,80 @@
       margin: 2.5rem 0;
     }
 
-    .accent-bar {
-      width: 3rem;
-      height: 3px;
-      background: var(--indigo-400);
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-    }
-
-    .grid-4 {
+    /* Read→Write→Own flow diagram */
+    .flow {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.75rem;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: 2.5rem;
     }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    @media (max-width: 820px) {
+      .flow { grid-template-columns: 1fr; }
+      .flow .arrow { display: none; }
+    }
+    .flow-node {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 190px;
+    }
+    .flow-node.active {
+      border-color: var(--indigo-500);
+      background: linear-gradient(180deg, rgba(26,12,109,0.35), rgba(26,12,109,0.1));
+    }
+    .flow-node.ghost {
+      border-style: dashed;
+      opacity: 0.7;
+    }
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--indigo-400);
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 300;
+      padding: 0 0.25rem;
+    }
 
-    .text-muted { color: var(--color-muted-foreground); }
+    /* Privacy / convenience slider visual */
+    .slider-box {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+    }
+    .slider-track {
+      position: relative;
+      height: 3px;
+      background: linear-gradient(to right, var(--indigo-600), var(--neutral-700));
+      border-radius: 2px;
+      margin: 2rem 0 0.75rem 0;
+    }
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      left: 68%;
+      transform: translate(-50%, -50%);
+      width: 14px; height: 14px;
+      background: var(--indigo-300);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--indigo-400);
+    }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-muted-foreground);
+    }
 
     .nav-dots {
       position: fixed;
@@ -192,9 +256,30 @@
       width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--neutral-700);
-      transition: background 150ms;
+      transition: background 150ms, transform 150ms;
     }
-    .nav-dots a:hover { background: var(--indigo-400); }
+    .nav-dots a:hover { background: var(--indigo-400); transform: scale(1.2); }
+
+    .avatar {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: var(--neutral-800);
+      border: 1px solid var(--color-border);
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--indigo-300);
+      border: 1px solid var(--indigo-600);
+      border-radius: var(--radius-full);
+      padding: 0.125rem 0.625rem;
+      background: rgba(26, 12, 109, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
 
     .qr-placeholder {
       width: 200px;
@@ -211,366 +296,342 @@
       padding: 1rem;
     }
 
-    .logo-icon {
-      width: 32px; height: 32px;
+    .bullet {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 1.125rem;
+      padding: 0.5rem 0;
     }
-    .logo-wordmark {
-      height: 18px;
+    .bullet .mark {
+      color: var(--indigo-400);
+      font-family: var(--font-mono);
     }
 
-    .tag {
-      display: inline-block;
+    .experiment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .tweet-placeholder {
+      background: var(--neutral-900);
+      border: 1px dashed var(--neutral-700);
+      border-radius: var(--radius-xl);
+      padding: 1rem;
+      margin-top: 1rem;
       font-family: var(--font-mono);
       font-size: 0.75rem;
-      color: var(--indigo-300);
-      border: 1px solid var(--indigo-600);
-      border-radius: var(--radius-full);
-      padding: 0.125rem 0.625rem;
-      background: rgba(26, 12, 109, 0.2);
+      color: var(--neutral-500);
+      text-align: center;
     }
 
-    .footer-nav {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      color: var(--color-muted-foreground);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      z-index: 10;
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      background: var(--color-card);
     }
+
+    .logo-wordmark { height: 16px; opacity: 0.8; }
   </style>
 </head>
 <body>
 
-  <!-- Nav dots -->
   <nav class="nav-dots" aria-label="sections">
-    <a href="#who" title="who"></a>
-    <a href="#shift" title="shift"></a>
-    <a href="#rails" title="rails"></a>
-    <a href="#what" title="agent"></a>
+    <a href="#title" title="title"></a>
+    <a href="#premise" title="premise"></a>
+    <a href="#state" title="state"></a>
     <a href="#tour" title="tour"></a>
-    <a href="#open" title="open"></a>
-    <a href="#legos" title="legos"></a>
-    <a href="#ask" title="ask"></a>
+    <a href="#edges" title="edges"></a>
+    <a href="#experiments" title="experiments"></a>
+    <a href="#discuss" title="discuss"></a>
   </nav>
 
-  <!-- 0. WHO -->
-  <section id="who" class="grid-bg">
-    <div class="wrap">
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 3rem;">
-        <img src="./assets/icon-light.svg" alt="EigenCloud" class="logo-icon" />
-        <img src="./assets/primary-wordmark-light.svg" alt="EigenCloud" class="logo-wordmark" />
-      </div>
-
-      <p class="eyebrow-indigo" style="margin-bottom: 1.5rem;">agents making money</p>
-      <h1 class="display-hero">
-        Matt Murray<span class="serif-accent" style="display:block; font-size: 0.5em; margin-top: 1rem;">on what agents are spending money on.</span>
-      </h1>
-
-      <div style="margin-top: 3rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <span class="pill"><span class="dot"></span>Eigen Labs</span>
-        <span class="pill">EigenCloud</span>
-        <span class="pill">2026 · 04 · 30</span>
-      </div>
-
-      <p style="margin-top: 3rem; font-size: 1.25rem; max-width: 620px; color: var(--color-muted-foreground);">
-        A rundown on where this is today, what I think is coming, and the open questions I'd bet on.
-      </p>
-    </div>
-  </section>
-
-  <!-- 1. THE SHIFT -->
-  <section id="shift" class="grid-bg">
+  <!-- 0. TITLE -->
+  <section id="title" class="grid-bg">
     <span class="drift" style="left: 12%; animation-delay: -2s;"></span>
     <span class="drift" style="left: 78%; animation-delay: -8s;"></span>
-    <span class="drift" style="left: 45%; animation-delay: -14s;"></span>
     <div class="wrap">
-      <p class="eyebrow-indigo">01 — the shift</p>
-      <div class="accent-bar"></div>
-      <h2 class="display-hero">
-        Agents can now<br/>spend money.
-      </h2>
+      <p class="eyebrow-indigo" style="margin-bottom: 1.25rem;">a talk</p>
+      <h1 class="display-hero">
+        Agents Making Money<br/>
+        <span class="serif-accent" style="font-size: 0.5em;">and what they're buying.</span>
+      </h1>
 
-      <p style="margin-top: 2rem; font-size: 1.5rem; color: var(--color-muted-foreground); max-width: 640px;">
-        Not "soon." This week.
-      </p>
-
-      <div style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-        <div class="card card-indigo">
-          <p class="eyebrow-indigo" style="color: var(--indigo-200);">shipped this week</p>
-          <h3 class="display-lg" style="color: #fff; margin-top: 0.75rem;">Stripe Projects</h3>
-          <p class="text-muted" style="margin-top: 0.75rem; color: var(--indigo-100);">
-            Agents create Cloudflare accounts, buy domains, deploy. $100/mo default budget.
-          </p>
-          <p class="code" style="margin-top: 1rem; color: var(--indigo-200);">projects.dev</p>
+      <div style="display: flex; align-items: center; gap: 1rem; margin-top: 4rem;">
+        <div class="avatar" aria-label="matt"></div>
+        <div>
+          <p style="font-size: 1rem; font-weight: 500;">Matt Murray</p>
+          <p class="code text-muted" style="font-size: 0.8125rem;">Product · Eigen Labs</p>
         </div>
-
-        <div class="card">
-          <p class="eyebrow">live for a year</p>
-          <h3 class="display-lg" style="margin-top: 0.75rem;">x402 / MPP</h3>
-          <p class="text-muted" style="margin-top: 0.75rem;">
-            HTTP 402 + USDC. Machine Payments Protocol. Thousands of endpoints.
-          </p>
-          <p class="code" style="margin-top: 1rem;">x402scan.com</p>
-        </div>
-      </div>
-
-      <div class="codeblock" style="margin-top: 2.5rem;">
-<span class="c">// one curl, agent pays, results come back</span>
-curl -X POST https://stableenrich.dev/api/exa/search
-<span class="c">// → 402 Payment Required</span>
-<span class="c">// → agent signs, pays $0.01 in USDC</span>
-<span class="c">// → 200 OK</span>
       </div>
     </div>
   </section>
 
-  <!-- 2. THE RAILS -->
-  <section id="rails">
+  <!-- 1. PREMISE -->
+  <section id="premise">
     <div class="wrap">
-      <p class="eyebrow-indigo">02 — the rails</p>
+      <p class="eyebrow-indigo">01</p>
       <div class="accent-bar"></div>
-      <h2 class="display-xl">What agents pay with today.</h2>
+      <h2 class="display-xl">Agents are becoming<br/>economic actors.</h2>
 
-      <div class="grid-4" style="margin-top: 3rem;">
-        <div class="card" style="text-align: center;">
-          <p class="display-lg">x402</p>
-          <p class="eyebrow" style="margin-top: 0.75rem;">HTTP 402 · USDC · Base</p>
-        </div>
-        <div class="card" style="text-align: center;">
-          <p class="display-lg">MPP</p>
-          <p class="eyebrow" style="margin-top: 0.75rem;">machine payments · Tempo</p>
-        </div>
-        <div class="card" style="text-align: center;">
-          <p class="display-lg">Stripe</p>
-          <p class="eyebrow" style="margin-top: 0.75rem;">Agent sessions · Projects</p>
-        </div>
-        <div class="card" style="text-align: center;">
-          <p class="display-lg">Link</p>
-          <p class="eyebrow" style="margin-top: 0.75rem;">agent checkout</p>
-        </div>
-      </div>
-
-      <p style="margin-top: 3rem; font-size: 1.5rem; max-width: 720px; color: var(--color-muted-foreground);">
-        Rails are solved. Incumbents are racing.
-        The interesting work is on the other side —
-        <span style="color: var(--indigo-300); font-family: var(--font-serif); font-style: italic;">what agents are actually buying.</span>
+      <p style="margin-top: 2rem; font-size: 1.25rem; color: var(--color-muted-foreground); max-width: 720px;">
+        Algorithms have always shaped the internet — static ads, programmatic ads, hedge-fund trading.
+        Code has moved money for a while. <span style="color: var(--indigo-300); font-family: var(--font-serif); font-style: italic;">Agents are the next beat.</span>
       </p>
-    </div>
-  </section>
 
-  <!-- 3. DEMYSTIFY -->
-  <section id="what" class="grid-bg">
-    <div class="wrap">
-      <p class="eyebrow-indigo">03 — demystify</p>
-      <div class="accent-bar"></div>
-      <h2 class="display-xl">
-        An agent is just<br/>
-        <span style="color: var(--indigo-300);">smart code.</span>
-      </h2>
+      <div class="divider"></div>
 
-      <div style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
-        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
-          <p class="eyebrow">compute</p>
-          <p style="margin-top: 0.75rem; font-size: 1.25rem;">where it runs</p>
-        </div>
-        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+      <p class="display-md">An agent is just smart code.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1.5rem;">
+        <div class="card" style="text-align: center; padding: 1.25rem;">
           <p class="eyebrow">inference</p>
-          <p style="margin-top: 0.75rem; font-size: 1.25rem;">how it decides</p>
+          <p style="margin-top: 0.5rem;">the brain</p>
         </div>
-        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+        <div class="card" style="text-align: center; padding: 1.25rem;">
           <p class="eyebrow">tools</p>
-          <p style="margin-top: 0.75rem; font-size: 1.25rem;">what it can do</p>
+          <p style="margin-top: 0.5rem;">the hands</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 1.25rem;">
+          <p class="eyebrow">compute</p>
+          <p style="margin-top: 0.5rem;">where it runs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. STATE OF THINGS: Read → Write → Own? -->
+  <section id="state" class="grid-bg">
+    <div class="wrap">
+      <p class="eyebrow-indigo">02 — where we are</p>
+      <div class="accent-bar"></div>
+      <h2 class="display-xl">Capabilities are winning.</h2>
+      <p style="margin-top: 1.5rem; font-size: 1.25rem; color: var(--color-muted-foreground); max-width: 720px;">
+        Every week brings more services an agent can use. People are posting screenshots —
+        "you can now get 55 services." Payments are bridging read to write.
+      </p>
+
+      <div class="flow">
+        <div class="flow-node active">
+          <p class="eyebrow-indigo">read</p>
+          <p class="display-lg" style="margin-top: 0.5rem;">Agent consumes</p>
+          <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.9375rem;">
+            x402 endpoints, MCPs, APIs. Search, research, scrape. Exa, Parallel, Firecrawl, and hundreds more.
+          </p>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="flow-node active">
+          <p class="eyebrow-indigo">write</p>
+          <p class="display-lg" style="margin-top: 0.5rem;">Agent transacts</p>
+          <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.9375rem;">
+            Direct USDC transfers. DeFi calls. Stripe Projects buys domains and spins up infra.
+            OpenFront paying out to contributors.
+          </p>
+        </div>
+
+        <div class="arrow">→</div>
+
+        <div class="flow-node ghost">
+          <p class="eyebrow-indigo">own?</p>
+          <p class="display-lg" style="margin-top: 0.5rem;">Agent accrues</p>
+          <p class="text-muted" style="margin-top: 0.75rem; font-size: 0.9375rem;">
+            Wallet, identity, reputation, balance sheet. Still open — partly because the others aren't yet.
+          </p>
         </div>
       </div>
 
-      <p style="margin-top: 2.5rem; font-size: 1.25rem; color: var(--color-muted-foreground); max-width: 760px;">
-        Same shape as code we've always written. One new ingredient:
-        <span style="color: var(--foreground); font-weight: 500;">reasoning</span>.
-        One new tool category:
-        <span style="color: var(--indigo-300);">paid endpoints</span>.
+      <p style="margin-top: 2.5rem; font-size: 1.125rem; color: var(--color-muted-foreground); max-width: 720px;">
+        Payment rails are the bridge — stablecoins, x402/MPP, Stripe, onchain.
+        Lots of people figuring that out. Not where the novelty is.
       </p>
     </div>
   </section>
 
-  <!-- 4. LIVE TODAY TOUR -->
+  <!-- 3. TOUR -->
   <section id="tour">
     <div class="wrap">
-      <p class="eyebrow-indigo">04 — live today</p>
+      <p class="eyebrow-indigo">03 — what agents are paying for</p>
       <div class="accent-bar"></div>
-      <h2 class="display-xl">What agents are paying for.</h2>
+      <h2 class="display-xl">Live today.</h2>
 
-      <div style="margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem;">
-        <a href="https://x402scan.com" target="_blank" class="card" style="padding: 2rem;">
-          <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <div style="margin-top: 2rem;">
+        <a href="https://x402scan.com" target="_blank" class="card" style="padding: 1.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
             <span class="tag">directory</span>
             <p class="code text-muted">x402scan.com</p>
           </div>
-          <h3 class="display-lg" style="margin-top: 0.75rem;">The map of the market.</h3>
-          <p class="text-muted" style="margin-top: 0.5rem; font-size: 1.125rem;">Every x402 service, live prices, real traffic.</p>
+          <p class="display-lg">The map — every x402 service, live prices, real traffic.</p>
         </a>
+      </div>
 
-        <div class="grid-2">
-          <a href="https://exa.ai" target="_blank" class="card">
-            <p class="eyebrow">Exa</p>
-            <h3 class="display-lg" style="margin-top: 0.5rem;">Neural search</h3>
-            <p class="text-muted" style="margin-top: 0.5rem;">$0.01 / search. Agent reads the web, no API key.</p>
-          </a>
-          <a href="https://parallel.ai" target="_blank" class="card">
-            <p class="eyebrow">Parallel</p>
-            <h3 class="display-lg" style="margin-top: 0.5rem;">Research tasks</h3>
-            <p class="text-muted" style="margin-top: 0.5rem;">Agent delegates to another agent.</p>
-          </a>
-          <a href="https://firecrawl.dev" target="_blank" class="card">
-            <p class="eyebrow">Firecrawl</p>
-            <h3 class="display-lg" style="margin-top: 0.5rem;">Scrape-as-a-service</h3>
-            <p class="text-muted" style="margin-top: 0.5rem;">JS rendering, pay per page.</p>
-          </a>
-          <a href="#" target="_blank" class="card">
-            <p class="eyebrow">the weird ones</p>
-            <h3 class="display-lg" style="margin-top: 0.5rem;">Agents buying wine, holding tables</h3>
-            <p class="text-muted" style="margin-top: 0.5rem;">Physical-world consequences start here.</p>
-          </a>
-        </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <a href="https://exa.ai" target="_blank" class="card">
+          <p class="eyebrow">Exa</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Neural search</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">$0.01 / search</p>
+        </a>
+        <a href="https://parallel.ai" target="_blank" class="card">
+          <p class="eyebrow">Parallel</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Research tasks</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">agent delegates to agent</p>
+        </a>
+        <a href="https://firecrawl.dev" target="_blank" class="card">
+          <p class="eyebrow">Firecrawl</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Scrape-as-a-service</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">pay per page, JS rendering</p>
+        </a>
+        <a href="#" target="_blank" class="card">
+          <p class="eyebrow">the weird ones</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Wine bots, booking, payouts</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">physical-world consequences</p>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 5. OPEN QUESTIONS / PREDICTIONS -->
-  <section id="open" class="grid-bg">
-    <span class="drift" style="left: 8%; animation-delay: -5s;"></span>
-    <span class="drift" style="left: 92%; animation-delay: -11s;"></span>
+  <!-- 4. EDGES (open questions, privacy slider inline) -->
+  <section id="edges" class="grid-bg">
+    <span class="drift" style="left: 22%; animation-delay: -5s;"></span>
+    <span class="drift" style="left: 76%; animation-delay: -12s;"></span>
     <div class="wrap">
-      <p class="eyebrow-indigo">05 — where I'm betting</p>
+      <p class="eyebrow-indigo">04 — the edges</p>
       <div class="accent-bar"></div>
       <h2 class="display-xl">
-        Utility is the warm-up.<br/>
-        <span class="serif-accent">The good questions don't have products yet.</span>
+        Capabilities are easy.<br/>
+        <span class="serif-accent">The edges are the interesting part.</span>
       </h2>
 
-      <div style="margin-top: 3rem; display: flex; flex-direction: column; gap: 1.25rem;">
-        <div style="border-left: 3px solid var(--indigo-400); padding: 0.5rem 0 0.5rem 1.5rem;">
-          <h3 class="display-lg">Identity</h3>
-          <p class="text-muted" style="margin-top: 0.25rem; font-size: 1.125rem;">
-            When agents act on behalf of humans, across services, over time — who are they?
+      <p style="margin-top: 2rem; font-size: 1.125rem; color: var(--color-muted-foreground); max-width: 720px;">
+        I don't have answers here. A few of the threads I keep pulling on:
+      </p>
+
+      <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+        <div class="card">
+          <p class="eyebrow-indigo">identity</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Is a wallet enough?</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            Agents need to be first-class internet citizens. Do they get accounts, bank accounts, credentials?
+            Standards are emerging — nobody knows what sticks.
           </p>
         </div>
-        <div style="border-left: 3px solid var(--indigo-400); padding: 0.5rem 0 0.5rem 1.5rem;">
-          <h3 class="display-lg">Reputation</h3>
-          <p class="text-muted" style="margin-top: 0.25rem; font-size: 1.125rem;">
-            Stars and reviews assume humans. What does agent reputation even look like?
+
+        <div class="card">
+          <p class="eyebrow-indigo">provenance</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Agent vs human — do we care?</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            How do you prove what was generated by an agent? Does it matter, or is merit enough?
           </p>
         </div>
-        <div style="border-left: 3px solid var(--indigo-400); padding: 0.5rem 0 0.5rem 1.5rem;">
-          <h3 class="display-lg">Services that couldn't have existed before</h3>
-          <p class="text-muted" style="margin-top: 0.25rem; font-size: 1.125rem;">
-            Not "agent version of X." New shapes that require a non-human customer.
+
+        <div class="card">
+          <p class="eyebrow-indigo">privacy · convenience</p>
+          <p class="display-md" style="margin-top: 0.5rem;">The tension is real.</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            Convenience pulls toward shared context. Privacy pulls the other way.
+            Where do you land?
           </p>
+          <div class="slider-box" style="margin-top: 1rem; padding: 1rem;">
+            <div class="slider-track"><div class="slider-thumb"></div></div>
+            <div class="slider-labels"><span>privacy</span><span>convenience</span></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. LEGO BLOCKS -->
-  <section id="legos">
+  <!-- 5. WHAT WE'RE TINKERING WITH -->
+  <section id="experiments">
     <div class="wrap">
-      <p class="eyebrow-indigo">06 — what we're building</p>
+      <p class="eyebrow-indigo">05 — what we're tinkering with</p>
       <div class="accent-bar"></div>
-      <h2 class="display-xl">
-        Lego blocks,<br/>
-        not products.
-      </h2>
-
-      <p style="margin-top: 2rem; font-size: 1.25rem; color: var(--color-muted-foreground); max-width: 680px;">
-        EigenCloud gives code a way to run verifiably, hold a wallet, and get paid.
-        Use the pieces you want.
+      <h2 class="display-xl">Not products. Experiments.</h2>
+      <p style="margin-top: 1.5rem; font-size: 1.125rem; color: var(--color-muted-foreground); max-width: 720px;">
+        Lego blocks we're assembling at Eigen — verifiable compute, wallet-bound code, agent tooling.
+        Some things that came out of it:
       </p>
 
-      <div class="grid-2" style="margin-top: 3rem;">
-        <div class="card card-indigo">
-          <p class="eyebrow-indigo" style="color: var(--indigo-200);">EigenCompute</p>
-          <h3 class="display-lg" style="color: #fff; margin-top: 0.75rem;">Verifiable execution</h3>
-          <p style="margin-top: 0.75rem; color: var(--indigo-100);">
-            Your code runs in a TEE. What the agent did is provable, not just claimed.
+      <div class="experiment-grid">
+        <div class="card">
+          <p class="eyebrow-indigo">transit402</p>
+          <p class="display-md" style="margin-top: 0.5rem;">NYC transit, per-call</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            Subway, bus, Citi Bike for agents. $0.02 per check via x402 or MPP. Something I built to learn the rails.
           </p>
+          <div class="tweet-placeholder">[ embed: transit402 tweet ]</div>
         </div>
-        <div class="card card-indigo">
-          <p class="eyebrow-indigo" style="color: var(--indigo-200);">Persistent · wallet-bound</p>
-          <h3 class="display-lg" style="color: #fff; margin-top: 0.75rem;">Code that owns a wallet</h3>
-          <p style="margin-top: 0.75rem; color: var(--indigo-100);">
-            Logic and payouts tied together. The thing doing the work is the thing that earns.
+
+        <div class="card">
+          <p class="eyebrow-indigo">dark bloom</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Agents running companies</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            Pure-software firms — code that owns capital, makes decisions, pays contributors. Early probe.
           </p>
+          <div class="tweet-placeholder">[ embed: dark bloom tweet ]</div>
         </div>
-      </div>
 
-      <div class="divider"></div>
-
-      <div class="card" style="padding: 2rem;">
-        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-          <span class="tag">experiment</span>
-          <p class="code text-muted">Dark Bloom</p>
+        <div class="card">
+          <p class="eyebrow-indigo">agentkit</p>
+          <p class="display-md" style="margin-top: 0.5rem;">Agent accounts + tooling</p>
+          <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9375rem;">
+            Spin up a verifiable agent with its own wallet. Default path for "own."
+          </p>
+          <div class="tweet-placeholder">[ embed: agentkit example ]</div>
         </div>
-        <h3 class="display-lg" style="margin-top: 0.75rem;">Agents that run companies.</h3>
-        <p class="text-muted" style="margin-top: 0.75rem; font-size: 1.125rem; max-width: 680px;">
-          Pure-software firms — code that owns capital, makes decisions, pays contributors,
-          reports to governance, all verifiable. An early probe at what "agentic company" actually looks like.
-        </p>
       </div>
     </div>
   </section>
 
-  <!-- 7. ASK + BOUNTY -->
-  <section id="ask" class="grid-bg">
-    <span class="drift" style="left: 20%; animation-delay: -3s;"></span>
-    <span class="drift" style="left: 60%; animation-delay: -9s;"></span>
-    <span class="drift" style="left: 85%; animation-delay: -16s;"></span>
+  <!-- 6. DISCUSSION / YOUR MOVE -->
+  <section id="discuss" class="grid-bg">
+    <span class="drift" style="left: 15%; animation-delay: -3s;"></span>
+    <span class="drift" style="left: 55%; animation-delay: -9s;"></span>
+    <span class="drift" style="left: 88%; animation-delay: -15s;"></span>
     <div class="wrap">
-      <p class="eyebrow-indigo">07 — your move</p>
+      <p class="eyebrow-indigo">06 — your turn</p>
       <div class="accent-bar"></div>
-      <h2 class="display-hero">Ship a service.</h2>
-      <p style="margin-top: 2rem; font-size: 1.5rem; max-width: 720px; color: var(--color-muted-foreground);">
-        Not the agent. <span style="color: var(--foreground);">The service the agent pays.</span>
-        That's the open territory.
+      <h2 class="display-hero">Let's talk.</h2>
+
+      <p style="margin-top: 2rem; font-size: 1.25rem; color: var(--color-muted-foreground); max-width: 720px;">
+        I don't have the answers — that'd be bullshit. But these are the questions I'd love to hear yours on:
       </p>
 
-      <div style="margin-top: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2.5rem; align-items: center; flex-wrap: wrap;">
-        <div class="card card-indigo" style="padding: 2.5rem;">
-          <p class="eyebrow-indigo" style="color: var(--indigo-200);">bounty — tonight</p>
-          <h3 class="display-lg" style="color: #fff; margin-top: 0.75rem;">$100 to the first x402 or MPP service shipped today.</h3>
-          <p style="margin-top: 1rem; color: var(--indigo-100); font-size: 1.125rem;">
-            One endpoint. One price. Your pick.
-          </p>
-          <p class="code" style="margin-top: 1rem; color: var(--indigo-200);">
-            scan QR → DM me the URL before midnight
+      <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.25rem;">
+        <div class="bullet"><span class="mark">01</span><span>What would you want your agent to be able to do?</span></div>
+        <div class="bullet"><span class="mark">02</span><span>What <em>can't</em> you do right now?</span></div>
+        <div class="bullet"><span class="mark">03</span><span>What are you concerned about?</span></div>
+      </div>
+
+      <div style="margin-top: 4rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;">
+        <div>
+          <p class="eyebrow-indigo">tools I use</p>
+          <p style="margin-top: 0.5rem; font-size: 1.125rem;">AgentKit · AgentCash · Stripe · x402 · MPP</p>
+          <p class="text-muted" style="margin-top: 1rem; font-size: 0.9375rem;">
+            Scan to drop a response, DM me, or just see the links.
           </p>
         </div>
         <div class="qr-placeholder">
-          [ QR CODE<br/>→ bounty link ]
+          [ QR CODE<br/>→ discussion link ]
         </div>
       </div>
 
-      <div style="margin-top: 3rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 1.25rem; max-width: 640px;">
-        <p>→ Pick something a human would pay $0.02 for.</p>
-        <p>→ Ship a paid endpoint.</p>
-        <p>→ See who shows up.</p>
-      </div>
-
-      <div class="divider"></div>
-
-      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-        <img src="./assets/icon-light.svg" alt="EigenCloud" class="logo-icon" />
-        <div>
-          <p style="font-size: 1.125rem;">Come find me after.</p>
-          <p class="code text-muted" style="margin-top: 0.25rem;">matt · eigen labs · github.com/mmurrs</p>
+      <div style="margin-top: 3rem;">
+        <div class="footer-bar">
+          <div class="avatar" aria-label="matt"></div>
+          <div style="flex: 1;">
+            <p style="font-size: 0.9375rem; font-weight: 500;">Matt Murray · Eigen Labs</p>
+            <p class="code text-muted" style="font-size: 0.75rem;">github.com/mmurrs · come find me after</p>
+          </div>
+          <img src="./assets/primary-wordmark-light.svg" alt="EigenCloud" class="logo-wordmark" />
         </div>
       </div>
     </div>
   </section>
-
-  <div class="footer-nav">scroll · or press ↓</div>
 
 </body>
 </html>
