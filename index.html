@@ -138,8 +138,12 @@
     .gallery .card { padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; }
     .gallery .shot {
       position: relative; border-radius: var(--radius-lg); overflow: hidden;
-      background: var(--neutral-900); aspect-ratio: 16/10; display: block;
+      background: linear-gradient(135deg, var(--neutral-900) 0%, rgba(26,12,109,0.15) 100%);
+      aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--color-border);
     }
+    .gallery .shot svg { width: 64px; height: 64px; color: var(--indigo-300); opacity: 0.9; }
+    .gallery .shot.shot-img { padding: 0; }
     .gallery .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .gallery .caption { display: flex; flex-direction: column; gap: 0.25rem; padding: 0 0.25rem; }
     .gallery .caption .ey { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--indigo-300); }
@@ -499,7 +503,7 @@
 
       <div class="gallery">
         <a href="https://docs.eigencloud.xyz/agentkit/get-started/agentkit-overview" target="_blank" class="card">
-          <div class="shot"><img src="./assets/screenshots/agentkit-docs.png" alt="AgentKit documentation" /></div>
+          <div class="shot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
           <div class="caption">
             <span class="ey">toolkit</span>
             <span class="ttl">AgentKit</span>
@@ -508,7 +512,7 @@
         </a>
 
         <a href="https://www.darkbloom.dev/" target="_blank" class="card">
-          <div class="shot"><img src="./assets/screenshots/darkbloom-idle-macs.png" alt="Dark Bloom — private inference on idle Macs" /></div>
+          <div class="shot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10.5" r="2.5"/></svg></div>
           <div class="caption">
             <span class="ey">private inference</span>
             <span class="ttl">Dark Bloom</span>
@@ -517,7 +521,7 @@
         </a>
 
         <a href="https://x.com/sreeramkannan/status/2000272005011321242?s=20" target="_blank" class="card">
-          <div class="shot"><img src="./assets/screenshots/openfront-tournament.png" alt="OpenFront on EigenCloud: offchain logic, onchain payouts" /></div>
+          <div class="shot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21 1.18.54 2.03 2.03 2.03 3.79M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg></div>
           <div class="caption">
             <span class="ey">untrusted tournaments</span>
             <span class="ttl">OpenFront</span>
@@ -526,7 +530,7 @@
         </a>
 
         <a href="https://x.com/sreeramkannan/status/2041228233426018394" target="_blank" class="card">
-          <div class="shot"><img src="./assets/screenshots/agent-companies.png" alt="Agent companies — firm that is pure software" /></div>
+          <div class="shot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M8 8V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v3M3 13h18M12 11v4"/></svg></div>
           <div class="caption">
             <span class="ey">future bet</span>
             <span class="ttl">Agent companies</span>
@@ -535,7 +539,7 @@
         </a>
 
         <a href="#" target="_blank" class="card">
-          <div class="shot"><img src="./assets/screenshots/eigencloud-x402.png" alt="EigenCloud x402 integration diagram" /></div>
+          <div class="shot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/><path d="M12 12l-2 4h4l-2 4" stroke-width="1.25"/></svg></div>
           <div class="caption">
             <span class="ey">stack</span>
             <span class="ttl">EigenCloud × x402</span>
@@ -544,7 +548,7 @@
         </a>
 
         <a href="https://transit402.dev/" target="_blank" class="card">
-          <div class="shot"><img src="./assets/screenshots/transit402.png" alt="transit402 — NYC transit API for agents" /></div>
+          <div class="shot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
           <div class="caption">
             <span class="ey">x402 / MPP · source code verified</span>
             <span class="ttl">transit402</span>
@@ -583,7 +587,7 @@
         </div>
         <a href="https://docs.eigencloud.xyz/" target="_blank" style="text-decoration: none;">
           <div class="qr-placeholder" style="padding: 0.75rem; flex-direction: column; gap: 0.5rem;">
-            <img src="./assets/qr/eigencompute-docs.svg" alt="Scan → docs.eigencloud.xyz" style="width: 100%; height: auto;" />
+            <img src="./assets/qr/eigencompute-docs.png" alt="Scan → docs.eigencloud.xyz" style="width: 100%; height: auto;" />
             <p style="font-size: 0.6875rem; color: var(--neutral-600); letter-spacing: 0.05em; text-transform: uppercase; text-align: center;">docs.eigencloud.xyz</p>
           </div>
         </a>
